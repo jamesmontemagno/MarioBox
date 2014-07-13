@@ -51,9 +51,10 @@
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>ARMv7</MtouchArch>
-    <AssemblyName>MonkeyBox</AssemblyName>
+    <AssemblyName>MarioBox</AssemblyName>
     <IpaPackageName>
     </IpaPackageName>
+    <MtouchSdkVersion>7.1</MtouchSdkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <Optimize>true</Optimize>

@@ -12,7 +12,7 @@ namespace MarioBox
 		AboutController about;
 		public PlaygroundViewController ()
 		{
-			this.Title = "Mario Box";
+			this.Title = "Photos in Mushroom Kingdom";
 		}
 
 		UIBarButtonItem editButton, doneButton, addButton;

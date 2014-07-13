@@ -35,8 +35,6 @@
 			</array>
 		</dict>
 	</array>
-	<key>CFBundleDisplayName</key>
-	<string>MarioBox</string>
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
@@ -59,5 +57,7 @@
 	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>
+	<key>CFBundleDisplayName</key>
+	<string>Photos in MK</string>
 </dict>
 </plist>

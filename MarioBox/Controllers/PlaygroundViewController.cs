@@ -16,6 +16,7 @@ namespace MarioBox
 		}
 
 		UIBarButtonItem editButton, doneButton, addButton;
+		UIActionSheet addAction;
 		public override void ViewDidLoad ()
 		{
 			base.ViewDidLoad ();
@@ -23,19 +24,23 @@ namespace MarioBox
 			NavigationController.NavigationBar.BarStyle = UIBarStyle.Black;
 			addButton = new UIBarButtonItem (UIBarButtonSystemItem.Add, (sender, args) => {
 
-				var action = new UIActionSheet("Add AR Card", 
-					null, 
-					"Cancel",
-					null, 
-					PlayGroundViewModel.AllARCards);
-				action.Clicked += (sender2, e) => {
-					if(e.ButtonIndex >= PlayGroundViewModel.AllARCards.Length)
-						return;
+				if(addAction == null)
+				{
+					addAction = new UIActionSheet("Add AR Card", 
+						null, 
+						"Cancel",
+						null, 
+						PlayGroundViewModel.AllARCards);
+						addAction.Clicked += (sender2, e) => {
+						if(e.ButtonIndex >= PlayGroundViewModel.AllARCards.Length)
+							return;
 
-					PlayGroundViewModel.Instance.AddCard(PlayGroundViewModel.AllARCards[e.ButtonIndex]);
-					PlayGroundView.UpdateARCards (PlayGroundViewModel.Instance.ActiveARCards);
-				};
-				action.ShowFrom(addButton, true);
+						PlayGroundViewModel.Instance.AddCard(PlayGroundViewModel.AllARCards[e.ButtonIndex]);
+						PlayGroundView.UpdateARCards (PlayGroundViewModel.Instance.ActiveARCards);
+					};
+				}
+				if(!addAction.Visible)
+					addAction.ShowFrom(addButton, true);
 			});
 
 			editButton = new UIBarButtonItem (UIBarButtonSystemItem.Edit, 

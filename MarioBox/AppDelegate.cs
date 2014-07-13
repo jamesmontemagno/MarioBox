@@ -25,7 +25,13 @@ namespace MarioBox
 
 			// create a new window instance based on the screen size
 			window = new UIWindow (UIScreen.MainScreen.Bounds);
-
+			UINavigationBar.Appearance.BackgroundColor = UIColor.FromRGBA(0,0,0,0);
+			UINavigationBar.Appearance.TintColor = UIColor.White;
+			UINavigationBar.Appearance.SetTitleTextAttributes (new UITextAttributes () {
+				Font = UIFont.FromName ("HelveticaNeue-Light", 20f),
+				TextColor = UIColor.White
+			});
+			UIButton.Appearance.TintColor = UIColor.White;
 			window.RootViewController = new UINavigationController (new PlaygroundViewController ());
 
 

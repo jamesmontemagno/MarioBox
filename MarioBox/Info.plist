@@ -23,7 +23,7 @@
 	<key>MinimumOSVersion</key>
 	<string>7.0</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.xamarin.mariobox</string>
+	<string>com.refractored.mariobox</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

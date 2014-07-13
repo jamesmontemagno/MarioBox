@@ -8,16 +8,15 @@
     <ProjectGuid>{E8DCAA39-93C8-4251-A2AB-FD5CD600378A}</ProjectGuid>
     <ProjectTypeGuids>{6BC8ED88-2882-458C-8E55-DFD12B67127B};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <OutputType>Exe</OutputType>
-    <RootNamespace>MonkeyBox</RootNamespace>
+    <RootNamespace>MarioBox</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>MonkeyBox</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhoneSimulator' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhoneSimulator\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;__IOS__</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -25,23 +24,25 @@
     <MtouchDebug>true</MtouchDebug>
     <MtouchI18n>
     </MtouchI18n>
-    <MtouchArch>ARMv7</MtouchArch>
+    <MtouchArch>i386</MtouchArch>
+    <AssemblyName>MarioBox</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\iPhoneSimulator\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchLink>None</MtouchLink>
+    <DefineConstants>__IOS__</DefineConstants>
+    <AssemblyName>MarioBox</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\iPhone\Debug</OutputPath>
-    <DefineConstants>DEBUG;</DefineConstants>
+    <DefineConstants>DEBUG;__IOS__</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
@@ -50,18 +51,21 @@
     <MtouchI18n>
     </MtouchI18n>
     <MtouchArch>ARMv7</MtouchArch>
+    <AssemblyName>MonkeyBox</AssemblyName>
+    <IpaPackageName>
+    </IpaPackageName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\iPhone\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Developer</CodesignKey>
+    <DefineConstants>__IOS__</DefineConstants>
+    <AssemblyName>MonkeyBox</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\iPhone\Ad-Hoc</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -70,9 +74,10 @@
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignProvision>Automatic:AdHoc</CodesignProvision>
+    <DefineConstants>__IOS__</DefineConstants>
+    <AssemblyName>MonkeyBox</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\iPhone\AppStore</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -80,39 +85,71 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
     <ConsolePause>false</ConsolePause>
     <CodesignProvision>Automatic:AppStore</CodesignProvision>
+    <DefineConstants>__IOS__</DefineConstants>
+    <AssemblyName>MonkeyBox</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
+    <Reference Include="MonoTouch.Dialog-1" />
+    <Reference Include="Refractored.Xam.Settings">
+      <HintPath>..\packages\Xam.Plugins.Settings.1.3.0.0\lib\MonoTouch10\Refractored.Xam.Settings.dll</HintPath>
+    </Reference>
+    <Reference Include="Refractored.Xam.Settings.Abstractions">
+      <HintPath>..\packages\Xam.Plugins.Settings.1.3.0.0\lib\MonoTouch10\Refractored.Xam.Settings.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.3\lib\portable-net40+sl4+wp7+win8\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="Controllers\" />
+    <Folder Include="Models\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Views\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Info.plist" />
+    <None Include="Properties\_SettingsStarted.txt" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppDelegate.cs" />
-    <Compile Include="PlaygroundViewController.cs" />
-    <Compile Include="Extensions.cs" />
-    <Compile Include="ARCard.cs" />
-    <Compile Include="ARCardView.cs" />
+    <Compile Include="Controllers\AboutController.cs" />
+    <Compile Include="Controllers\PlaygroundViewController.cs" />
+    <Compile Include="Models\ARCard.cs" />
+    <Compile Include="Views\ARCardView.cs" />
+    <Compile Include="Views\PlaygroundView.cs" />
+    <Compile Include="Helpers\Color.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\Settings.cs" />
+    <Compile Include="ViewModels\PlayGroundViewModel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <BundleResource Include="Resources\bowser.png" />
-    <BundleResource Include="Resources\bowser%402x.png" />
-    <BundleResource Include="Resources\goomba.png" />
-    <BundleResource Include="Resources\goomba%402x.png" />
-    <BundleResource Include="Resources\koopatroopa.png" />
-    <BundleResource Include="Resources\koopatroopa%402x.png" />
-    <BundleResource Include="Resources\luigi.png" />
-    <BundleResource Include="Resources\luigi%402x.png" />
-    <BundleResource Include="Resources\mario.png" />
-    <BundleResource Include="Resources\mario%402x.png" />
-    <BundleResource Include="Resources\peach.png" />
-    <BundleResource Include="Resources\peach%402x.png" />
+    <BundleResource Include="Resources\Bowser.png" />
+    <BundleResource Include="Resources\Bowser%402x.png" />
+    <BundleResource Include="Resources\Goomba.png" />
+    <BundleResource Include="Resources\Goomba%402x.png" />
+    <BundleResource Include="Resources\KoopaTroopa.png" />
+    <BundleResource Include="Resources\KoopaTroopa%402x.png" />
+    <BundleResource Include="Resources\Luigi.png" />
+    <BundleResource Include="Resources\Luigi%402x.png" />
+    <BundleResource Include="Resources\Mario.png" />
+    <BundleResource Include="Resources\Mario%402x.png" />
+    <BundleResource Include="Resources\Peach.png" />
+    <BundleResource Include="Resources\Peach%402x.png" />
+    <BundleResource Include="Resources\delete.png" />
+    <BundleResource Include="Resources\delete%402x.png" />
+    <BundleResource Include="Resources\settings.png" />
+    <BundleResource Include="Resources\settings%402x.png" />
+    <BundleResource Include="Resources\save.png" />
+    <BundleResource Include="Resources\save%402x.png" />
+    <BundleResource Include="Resources\QuestionMark.png" />
+    <BundleResource Include="Resources\QuestionMark%402x.png" />
   </ItemGroup>
 </Project>

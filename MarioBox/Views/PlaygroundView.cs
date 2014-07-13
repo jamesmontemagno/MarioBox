@@ -1,53 +1,11 @@
-using System;
+﻿using System;
 using MonoTouch.UIKit;
+using System.Collections.Generic;
 using System.Linq;
 using System.Drawing;
-using System.Collections.Generic;
 
 namespace MarioBox
 {
-	public class PlaygroundViewController : UIViewController
-	{
-		PlayGroundView PlayGroundView;
-		public ARCard[] ARCards { get; set; }
-		public PlaygroundViewController ()
-		{
-			this.Title = "Mario Box";
-
-			ARCards = ARCard.GetAllARCards ();
-		}
-		public override void ViewWillAppear (bool animated)
-		{
-			PlayGroundView.Parent = this;
-			PlayGroundView.UpdateARCards (ARCards);
-			base.ViewWillAppear (animated);
-			this.BecomeFirstResponder ();
-		}
-		public override void ViewDidDisappear (bool animated)
-		{
-			PlayGroundView.Parent = null;
-			base.ViewDidDisappear (animated);
-		}
-
-		void HandleARCardsUpdated (object sender, EventArgs e)
-		{
-			PlayGroundView.UpdateARCards (ARCards);
-		}
-
-		public override void LoadView ()
-		{
-			View = PlayGroundView = new PlayGroundView ();
-		}
-
-
-		public override bool CanBecomeFirstResponder {
-			get {
-				return true;
-			}
-		}
-
-	}
-
 	public class PlayGroundView : UIView
 	{
 		UIPinchGestureRecognizer pinchGesture;
@@ -65,20 +23,17 @@ namespace MarioBox
 
 			this.BackgroundColor = UIColor.DarkGray;
 		}
-		Dictionary<ARCard, ARCardView> ARCardDictionary = new Dictionary<ARCard, ARCardView> ();
+
 		public void UpdateARCards(ARCard[] arcards)
 		{
 			UIView.BeginAnimations ("arcards");
-			for(int i = 0; i < arcards.Length; i ++){
-				ARCard arcard = arcards[i];
-				ARCardView view;
-				ARCardDictionary.TryGetValue(arcard,out view);
-				if (view == null){
-					view = new ARCardView (arcard);
-					ARCardDictionary.Add(arcard,view);
-				}
+			for (int i = 0; i < arcards.Length; i++) {
+				ARCard arcard = arcards [i];
+				var view = PlayGroundViewModel.Instance.AddOrGetCardView (arcard);
+				view.EditMode = PlayGroundViewModel.Instance.EditMode;
+
 				view.Update (arcard, this.Bounds);
-				this.InsertSubview(view,i);
+				this.InsertSubview (view, i);
 			}
 			UIView.CommitAnimations ();
 		}
@@ -112,6 +67,11 @@ namespace MarioBox
 			if (gesture.State == UIGestureRecognizerState.Began)
 				lastScale = 1f;
 			var scale = 1f - (lastScale - gesture.Scale);
+
+			if (scale < .4)
+				scale = .4f;
+			else if (scale > 3)
+				scale = 3.0f;
 
 			var transform = CurrentARCard.Transform;
 			transform.Scale (scale, scale);
